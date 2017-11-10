@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-LineSlice
+QFIScope
 
 A Module to let users drag a line on a pcolormesh plot & plot the data values along that line on a separate axis.
 See `help(LineSlice)` for examples on usage.
