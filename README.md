@@ -28,5 +28,7 @@ The resulting interactive plot, with data plotted along the dragged line:
 
 ## Authors ##
 Created by Demis D. John, University of California Santa Barbara
+
 For analyzing thermal data from the [QFI Infrared Thermal Microscope](https://signupmonkey.ece.ucsb.edu/wiki/index.php/IR_Thermal_Microscope_(QFI)) at the [UCSB Nanofab](http://nanotech.ucsb.edu).
+
 Feel free to fork this repo, add functionality, and submit a pull request to incorporate your updates.
