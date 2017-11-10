@@ -49,7 +49,7 @@ class LineSlice:
         '''
         self.img = img
         self.ax = ax
-        self.data = img.get_array().reshape(img._meshWidth, img._meshHeight)
+        self.data = np.flipud(  np.rot90(   img.get_array().reshape(img._meshWidth, img._meshHeight  , 1)   , 1)  )
 
         # register the event handlers:
         self.cidclick = img.figure.canvas.mpl_connect('button_press_event', self)
@@ -84,15 +84,18 @@ class LineSlice:
         
         x0,y0 = self.p1[0], self.p1[1]  # get user's selected coordinates
         x1,y1 = self.p2[0], self.p2[1]
+                
         length = int( np.hypot(x1-x0, y1-y0) )
         x, y = np.linspace(x0, x1, length),   np.linspace(y0, y1, length)
         
         # Extract the values along the line with nearest-neighbor pixel value:
         #D = img.get_array().reshape(img._meshWidth, img._meshHeight)    # get temp. data from the pcolor plot
         zi = self.data[x.astype(np.int), y.astype(np.int)]
+        
         # Extract the values along the line, using cubic interpolation:
         #import scipy.ndimage
         #zi = scipy.ndimage.map_coordinates(z, np.vstack((x,y)))
+        
         
         # if plots exist, delete them:
         if self.markers != None and not self.hold:
@@ -109,7 +112,8 @@ class LineSlice:
         else:
             self.markers = self.img.axes.plot([x0, x1], [y0, y1], 'wo')   
         # plot an arrow:
-        self.arrow = self.img.axes.annotate("",
+        self.arrow = self.img.axes.annotate(
+                    "",
                     xy=(x0, y0),    # start point
                     xycoords='data',
                     xytext=(x1, y1),    # end point
@@ -126,8 +130,9 @@ class LineSlice:
         
         # plot the data along the line:
         if self.line != None and not self.hold:
-            self.line[0].remove()   # delete the plot
+            self.line[0].remove()   # delete the previous line
         
+        # pass user's kwargs to plot() if provided
         if self.ax_kwargs != None:
             self.line = self.ax.plot(zi, **self.ax_kwargs)
         else:
@@ -186,7 +191,7 @@ def Plot(DataFilePath, LineSlicePlot=True, hold=False, img_kwargs={}, ax_kwargs=
     '''
     
     D = np.genfromtxt(DataFilePath, skip_header=4, delimiter=',', unpack=True)
-    # remove NANs
+    # remove NANs:
     D = D[0:-1,:]
     #print( D.shape )
 
@@ -203,7 +208,7 @@ def Plot(DataFilePath, LineSlicePlot=True, hold=False, img_kwargs={}, ax_kwargs=
     # contourf, pcolormesh, imshow
     import matplotlib.cm as cm      # colormaps
     #print( ax  )
-    img = ax[0].pcolormesh( np.arange( len(D[0,:]) ), np.arange(len(D[:,0])), D  , cmap=cm.spectral)
+    img = ax[0].pcolormesh( np.arange( len(D[0,:]) ), np.arange( len(D[:,0]) ), D  , cmap=cm.spectral)
     fig.colorbar(img, ax=ax[0])	# print the colorbar for this subplot/axis
 
 
