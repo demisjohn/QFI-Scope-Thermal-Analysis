@@ -188,6 +188,18 @@ def Plot(DataFilePath, LineSlicePlot=True, hold=False, img_kwargs={}, ax_kwargs=
     
     LineTraceObj : the LineTrace Object, see `help(QFIScope.LineSlice)`, which also includes figure objects
     
+    
+    Examples
+    --------
+    Import 2D Thermal Map data, and plot the data on an interactive plot on which the user can drag lines to display the temperature profile along a line:
+
+        >>> import QFIScope as qfi     # module for QFI Thermal Imaging Microscope data analysis
+
+        >>> DataFilePath = '2016-03-02 - QFI thermal image data - 1.5mA med temp.txt'
+
+        >>> qfi.Plot(DataFilePath, LineSlicePlot=True)
+    
+    
     '''
     
     D = np.genfromtxt(DataFilePath, skip_header=4, delimiter=',', unpack=True)
