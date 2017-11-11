@@ -2,7 +2,9 @@
 
 ## Project Purpose ##
 
-A Module to let users drag a line on a pcolormesh plot & plot the data values along that line on a separate axis.
+Intended for 2D Temperature data exported from the [QFI Infrared Thermal Microscope](https://signupmonkey.ece.ucsb.edu/wiki/index.php/IR_Thermal_Microscope_(QFI)), 
+this Module lets users import the 2D thermal data, and then drag a line on a pcolormesh plot & plot the data values along that line on a separate axis.
+
 See `help(LineSlice)` for examples on usage.
 
 ## Examples ##
