@@ -7,7 +7,21 @@ this Module lets users import the 2D thermal data, and then drag a line on a pco
 
 See `help(QFIScope.Plot)` for examples on usage.
 
-## Examples ##
+## Getting Data Files ##
+
+From the QFI "ThermalMap" software, after acquiring a ThermalMap image, go to 
+
+    File > Save Text...
+
+to save a text file of the raw thermal data.  This is the data file you'll load with the Python script.
+
+and optionally also do
+
+    File > Save Image...
+    
+to save the image itself, which should look identical to the plot you obtain when running the pythong script.  Saving a screenshot of the entire measurement is also a good idea, since that'll show you the sensitivity and scale bars as well.
+
+## Python Examples ##
 
 The following script pops up a plot of the thermal image, with interactive dragging to show a line-slice along the dragged line:
 
